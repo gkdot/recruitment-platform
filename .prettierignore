@@ -1,0 +1,12 @@
+# Directories:
+build
+coverage
+node_modules
+dist
+.github
+*.log
+
+# Files:
+package-lock.json
+package.json
+README.md
