@@ -1,16 +1,15 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Layout } from "../components/Layout";
 
-export function Landing() {
+export const Landing: React.FC = () => {
   return (
-    <main>
+    <Layout>
       <div>
-        <img src="/logo.svg" alt="Logo" className="w-32 h-32 mb-8" />
-        <h1>Welcome to GDSC@WM.</h1>
-        <p>Start applying for our Fall 2025 recruitment today.</p>
-        <Link to="/login">Get Started</Link>
+        <p className="text-2xl font-semibold">Welcome to GDSC@WM</p>
+        <p>This is where your app content will go.</p>
       </div>
-    </main>
+    </Layout>
   );
-}
+};
 
 export default Landing;

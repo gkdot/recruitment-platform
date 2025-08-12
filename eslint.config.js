@@ -1,29 +1,49 @@
-import js from "@eslint/js";
+// eslint.config.js
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
-import pluginJs from '@eslint/js';
-import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
+import prettierConfig from "eslint-config-prettier";
+import js from "@eslint/js";
 
-export default defineConfig([
-  { 
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], 
-    plugins: { js }, 
-    extends: ["js/recommended"], 
-    languageOptions: { 
-      globals: globals.browser 
+export default [
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: { jsx: true },
+      },
+      globals: globals.browser,
     },
+
+    plugins: {
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
+      "jsx-a11y": jsxA11yPlugin,
+    },
+
     settings: {
-      react: { 
-        version: 'detect', 
-        runtime: "automatic" 
-      }
-    }
+      react: {
+        version: "detect",
+        runtime: "automatic",
+      },
+    },
+
+    rules: {
+      ...js.configs.recommended.rules,
+      ...tseslint.configs.recommended.rules,
+      ...reactPlugin.configs.flat.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      ...jsxA11yPlugin.configs.recommended.rules,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+    },
   },
-  tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  pluginJs.configs.recommended,
-  pluginReact.configs.flat?.['jsx-runtime'] ?? pluginReact.configs?.['jsx-runtime'],
-  eslintConfigPrettier
-]);
+
+  prettierConfig,
+];
