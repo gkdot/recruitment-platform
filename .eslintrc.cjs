@@ -1,19 +1,6 @@
 // apps/web/.eslintrc.cjs
 module.exports = {
     root: true,
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      ecmaFeatures: {
-        jsx: true,
-      },
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
     env: {
       browser: true,
       es2021: true,
@@ -27,6 +14,19 @@ module.exports = {
       'plugin:@typescript-eslint/recommended',
       'prettier', // must be last to override ESLint rules that conflict with Prettier
     ],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true,
+      },
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     plugins: [
       'react',
       'react-hooks',
@@ -34,8 +34,7 @@ module.exports = {
       '@typescript-eslint',
     ],
     rules: {
-      // example: allow .tsx without React import in scope
-      'react/react-in-jsx-scope': 'off',
+      'react/react-in-jsx-scope': 'off'
     },
   }
   
