@@ -36,7 +36,7 @@ export default [
 
     rules: {
       ...js.configs.recommended.rules,
-      ...tseslint.configs.recommended[0].rules,
+      ...tseslint.configs.recommended.rules,
       ...reactPlugin.configs.flat.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
       ...jsxA11yPlugin.configs.recommended.rules,
