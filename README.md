@@ -26,13 +26,25 @@ Additionally, make sure to have [Node.js](https://nodejs.org/en) installed as we
 2. Open a Terminal window in the `recruitment-platform` directory and run this command:
 ```
 pnpm install
-```This will install the project's dependencies, and set up a number of code checks.
+```
+This will install the project's dependencies, and set up a number of code checks.
 3. You can now start the app by running this command:
 ```
 pnpm run dev
 ```
 Your terminal should output a URL - if you enter that in your browser, you should be able to view the app.
 
+### Configuring your environment variables
+
+This project requires certain environment variables to be set for proper functionality.
+
+1. Create a `.env` file by copying the provided `.env.example` file to `.env` in the root directory of this project:
+    ```
+    cp .env.example .env
+    ```
+
+2. Open the newly created .env file and replace the placeholder values with your actual credentials or configurations, which are stored in [Firebase](https://console.firebase.google.com/u/1/) under the club's Google account.
+  
 ### Code style and formatting
 
 We use ESLint + Prettier + Husky + lint-staged.
