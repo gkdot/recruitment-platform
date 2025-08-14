@@ -6,17 +6,15 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen">
       <header className="relative bg-white border-b border-gray-300 px-6 py-3 flex items-center">
         <img src="/logo.svg" alt="logo" className="h-6 w-auto" />
         <h2 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-semibold">
           Recruitment
         </h2>
       </header>
-      <main className="flex-1 w-full flex justify-center items-center p-6">
-        <div className="max-w-4xl w-full bg-white shadow rounded-lg p-8">
-          {children}
-        </div>
+      <main>
+        <div>{children}</div>
       </main>
     </div>
   );
