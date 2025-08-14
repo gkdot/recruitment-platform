@@ -23,7 +23,7 @@ export default function Login({ onClose }: LoginFormProps) {
       ></div>
 
       <div className="relative z-10 bg-white rounded-3xl shadow-lg px-10 py-8 max-w-md w-full text-center">
-        <h2 className="text-2xl font-semibold mb-2">Log in</h2>
+        <h2 className="text-2xl font-semibold mb-2">Welcome back</h2>
 
         <button
           type="button"

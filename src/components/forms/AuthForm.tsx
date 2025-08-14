@@ -12,7 +12,7 @@ export default function AuthForm() {
   });
 
   const onSubmit = async (data: AuthFormValues) => {
-    console.log("Signing up/in with:", data);
+    console.log("Submitting AuthForm with:", data);
     // TODO: Replace with API call or React Query mutation
   };
 
@@ -59,7 +59,7 @@ export default function AuthForm() {
         disabled={isSubmitting}
         className="w-full border border-green-700 text-green-900 py-2 rounded-full font-medium hover:bg-green-50 disabled:opacity-50"
       >
-        {isSubmitting ? "Logging in..." : "Sign in"}
+        {isSubmitting ? "Submitting..." : "Submit"}
       </button>
     </form>
   );

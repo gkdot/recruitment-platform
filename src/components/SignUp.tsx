@@ -1,11 +1,23 @@
-import { loginWithGoogle } from "../lib/auth";
-import AuthForm from "./forms/AuthForm";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 interface SignUpFormProps {
   onClose: () => void;
 }
 
 export default function SignUp({ onClose }: SignUpFormProps) {
+  const { user, signIn } = useAuth();
+  const navigate = useNavigate();
+
+  const handleClick = async () => {
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      await signIn();
+      navigate("/dashboard");
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
@@ -16,26 +28,22 @@ export default function SignUp({ onClose }: SignUpFormProps) {
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            onClose();
+            handleClick();
           }
         }}
         className="absolute inset-0 bg-black/60"
       ></div>
 
       <div className="relative z-10 bg-white rounded-3xl shadow-lg px-10 py-8 max-w-md w-full text-center">
-        <h2 className="text-2xl font-semibold mb-2">Sign up</h2>
+        <h2 className="text-2xl font-semibold mb-2">Create an account</h2>
 
         <button
           type="button"
-          onClick={loginWithGoogle}
+          onClick={handleClick}
           className="text-green-900 font-medium mb-6"
         >
           Sign up with Google
         </button>
-
-        <div className="space-y-4">
-          <AuthForm />
-        </div>
       </div>
     </div>
   );
