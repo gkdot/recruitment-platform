@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { UserProfile } from "./UserProfile";
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,6 +13,9 @@ export const Layout = ({ children }: LayoutProps) => {
         <h2 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-semibold">
           Recruitment
         </h2>
+        <div className="absolute right-6">
+          <UserProfile />
+        </div>
       </header>
       <main>
         <div>{children}</div>
