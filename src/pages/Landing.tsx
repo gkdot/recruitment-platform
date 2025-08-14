@@ -2,10 +2,12 @@ import { useState, type FC } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { FaGoogle, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
-import Login from "./Login";
+import Login from "../components/Login";
+import SignUp from "../components/SignUp";
 
 const Landing: FC = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
   return (
     <Layout>
       <main className="flex min-h-screen">
@@ -32,7 +34,8 @@ const Landing: FC = () => {
 
             <div className="flex gap-4 mt-8">
               <Link
-                to="/signup"
+                to="#"
+                onClick={() => setShowSignUp(true)}
                 className="bg-green-900 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-green-800"
               >
                 Start your application
@@ -189,6 +192,7 @@ const Landing: FC = () => {
           </div>
         </div>
         {showLogin && <Login onClose={() => setShowLogin(false)} />}
+        {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
       </main>
     </Layout>
   );

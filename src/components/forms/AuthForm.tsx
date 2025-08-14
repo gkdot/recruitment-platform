@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, type LoginFormValues } from "../../schemas/loginSchema";
+import { authSchema, type AuthFormValues } from "../../schemas/authSchema";
 
-export default function LoginForm() {
+export default function AuthForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<AuthFormValues>({
+    resolver: zodResolver(authSchema),
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
-    console.log("Logging in with:", data);
+  const onSubmit = async (data: AuthFormValues) => {
+    console.log("Signing up/in with:", data);
     // TODO: Replace with API call or React Query mutation
   };
 

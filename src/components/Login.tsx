@@ -1,11 +1,11 @@
 import { loginWithGoogle } from "../lib/auth";
-import LoginForm from "../components/forms/LoginForm";
+import AuthForm from "./forms/AuthForm";
 
 interface LoginFormProps {
   onClose: () => void;
 }
 
-export default function LoginModal({ onClose }: LoginFormProps) {
+export default function Login({ onClose }: LoginFormProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
@@ -34,7 +34,7 @@ export default function LoginModal({ onClose }: LoginFormProps) {
         </button>
 
         <div className="space-y-4">
-          <LoginForm />
+          <AuthForm />
         </div>
       </div>
     </div>
