@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
-import Login from "./pages/Login";
+import AuthGuard from "./components/AuthGuard";
 import "./App.css";
 
 function App() {
@@ -8,7 +8,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <AuthGuard allowedRoles={["admin", "member"]}>
+              <h1>Dashboard</h1>
+            </AuthGuard>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
