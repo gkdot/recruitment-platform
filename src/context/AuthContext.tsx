@@ -44,6 +44,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await setPersistence(auth, browserLocalPersistence);
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
+      await auth.currentUser?.getIdToken(true);
       // onAuthStateChanged will handle setting the user
     } catch (err) {
       console.error("Sign in failed", err);
