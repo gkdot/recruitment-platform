@@ -1,47 +1,45 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import AuthGuard from "./components/AuthGuard";
-import "./App.css";
+import { requireAuth } from "./lib/loaders";
 
 const Landing = lazy(() => import("./pages/Landing/Landing"));
 const Loading = lazy(() => import("./pages/Loading"));
-const Error = lazy(() => import("./pages/Error"));
+const ErrorPage = lazy(() => import("./pages/Error"));
 const ApplicantDashboard = lazy(() => import("./pages/ApplicantDashboard"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Landing />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/applicant",
+    element: <ApplicantDashboard />,
+    loader: () => requireAuth(["applicant"]),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin",
+    element: <AdminDashboard />,
+    loader: () => requireAuth(["admin", "super_admin"]),
+    errorElement: <ErrorPage />,
+    // children: [
+    //   { path: "users", element: <AdminUsers /> },
+    //   { path: "settings", element: <AdminSettings /> },
+    // ],
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
+]);
+
+export default function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="*" element={<Error type={"notfound"} />} />
-          <Route
-            path="/unauthorized"
-            element={<Error type={"unauthorized"} />}
-          />
-
-          <Route
-            path="/dashboard"
-            element={
-              <AuthGuard allowedRoles={["applicant"]}>
-                <ApplicantDashboard />
-              </AuthGuard>
-            }
-          />
-
-          <Route
-            path="/admin"
-            element={
-              <AuthGuard allowedRoles={["admin", "super_admin"]}>
-                <AdminDashboard />
-              </AuthGuard>
-            }
-          />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <Suspense fallback={<Loading />}>
+      <RouterProvider router={router} />
+    </Suspense>
   );
 }
-
-export default App;

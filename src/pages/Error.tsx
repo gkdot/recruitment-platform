@@ -1,29 +1,25 @@
-import { Link } from "react-router-dom";
+import { isRouteErrorResponse, Link, useRouteError } from "react-router-dom";
 
-type ErrorType = "unauthorized" | "notfound";
+export default function ErrorPage() {
+  const error = useRouteError();
 
-interface ErrorPageProps {
-  type: ErrorType;
-}
+  let code = "Error";
+  let title = "Something went wrong";
+  let message = "An unexpected error occurred.";
 
-export default function ErrorPage({ type }: ErrorPageProps) {
-  const config = {
-    unauthorized: {
-      code: "403",
-      title: "Unauthorized",
-      message: "You don't have permission to view this page.",
-    },
-    notfound: {
-      code: "404",
-      title: "Page Not Found",
-      message: "The page you're looking for doesn't exist.",
-    },
-  };
+  if (isRouteErrorResponse(error)) {
+    code = error.status.toString();
+    title = error.statusText;
 
-  const { code, title, message } = config[type];
+    if (error.status == 403) {
+      message = "You don't have permission to view this page.";
+    } else if (error.status === 404) {
+      message = "The page you're looking for doesn't exist.";
+    }
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center">
+    <div className="flex flex-col items-center justify-center h-screen w-screen text-center">
       <h1 className="text-6xl font-bold mb-4">{code}</h1>
       <h2 className="text-2xl font-semibold mb-2">{title}</h2>
       <p className="text-lg mb-6">{message}</p>
