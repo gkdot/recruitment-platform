@@ -16,15 +16,15 @@ export default function HeroSection({ onSignUp }: HeroSectionProps) {
         </p>
         <p className="text-lg mb-8">
           William and Mary prides itself on its liberal arts approach to
-          education; it’s one of the first things you learn when you come to
-          campus. This means biologists take creative writing, data scientists
-          complete geology field work, and comedian Patton Oswald (’91) jokes
-          about his experience in Physics for Poets.
+          education; it&apos;s one of the first things you learn when you come
+          to campus. This means biologists take creative writing, data
+          scientists complete geology field work, and comedian Patton Oswald
+          (&apos;91) jokes about his experience in Physics for Poets.
         </p>
         <p className="text-lg mb-8">
-          William and Mary’s DSC aims to build another bridge between computer
-          science and the other disciplines through education series and
-          consulting projects with research groups on campus.
+          William and Mary&apos;s DSC aims to build another bridge between
+          computer science and the other disciplines through education series
+          and consulting projects with research groups on campus.
         </p>
 
         <div className="flex gap-4 mt-8">

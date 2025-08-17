@@ -1,11 +1,7 @@
 import { useEffect } from "react";
 import { Layout } from "../components/Layout";
 
-export default function LoadingPage({
-  title = "Loading...",
-}: {
-  title?: string;
-}) {
+export default function Loading({ title = "Loading..." }: { title?: string }) {
   useEffect(() => {
     document.title = title;
   }, [title]);
