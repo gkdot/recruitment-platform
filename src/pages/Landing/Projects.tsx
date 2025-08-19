@@ -62,7 +62,7 @@ export default function ProjectsSection() {
       </div>
       <a
         href="https://docs.google.com/document/d/1bvN3zt_BzmtPjl_jkHCu0kWL2yXIZYlfaW7vsbhEos4/edit"
-        className="text-base text-blue-400 hover:text-blue-500 underline font-semibold"
+        className="text-lg text-blue-400 hover:text-blue-500 underline font-semibold"
       >
         Click here for past projects
       </a>

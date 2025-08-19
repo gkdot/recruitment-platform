@@ -7,8 +7,8 @@ interface HeroSectionProps {
 export default function HeroSection({ onSignUp }: HeroSectionProps) {
   return (
     <section className="bg-white rounded-lg shadow p-4 sm:p-6 lg:p-8">
-      <h1 className="text-2xl md:text-3xl font-bold mb-6">
-        Welcome to GDSC@WM.
+      <h1 className="text-2xl md:text-3xl font-bold mb-10">
+        Welcome to GDSC@W&M.
       </h1>
       <p className="text-base md:text-lg mb-6">
         Our mission is to work with other Developer Student Clubs around the
@@ -23,10 +23,9 @@ export default function HeroSection({ onSignUp }: HeroSectionProps) {
       </p>
       <p className="text-base md:text-lg mb-6">
         William and Mary&apos;s DSC aims to build another bridge between
-        computer science and the other disciplines through education series and
-        consulting projects with research groups on campus.
+        computer science and the other disciplines through educational workshop
+        series and consulting projects with research groups on campus.
       </p>
-
       <div className="flex gap-4 mt-8">
         <Link
           to="#"
