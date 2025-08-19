@@ -33,14 +33,16 @@ const PROJECTS = [
 
 export default function ProjectsSection() {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-2xl font-bold mb-6">Take a look at our projects.</h2>
-      <div className="grid grid-cols-5 gap-4 text-md mb-6">
+    <section className="bg-white rounded-lg shadow p-6">
+      <h2 className="text-xl md:text-2xl font-bold mb-4">
+        Take a look at our projects.
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-4">
         {PROJECTS.map((proj, i) => (
           <a
             key={i}
             href={proj.link}
-            className="relative group bg-gray-800 text-md text-white rounded-lg p-4 flex flex-col min-h-[180px] overflow-hidden transition-transform duration-200 hover:scale-105"
+            className="relative group bg-gray-800 text-white rounded-lg p-4 flex flex-col min-h-[10rem] overflow-hidden transition-transform duration-200 hover:scale-105"
           >
             <img
               src={proj.image}
@@ -48,10 +50,10 @@ export default function ProjectsSection() {
               className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-60 transition-opacity duration-300"
             />
             <div className="relative z-10 flex flex-col h-full">
-              <h3 className="font-semibold transition-colors duration-300 group-hover:text-white group-hover:brightness-125">
+              <h3 className="font-semibold group-hover:brightness-125">
                 {proj.title}
               </h3>
-              <span className="mt-auto transition-colors duration-300 group-hover:text-white group-hover:brightness-125">
+              <span className="mt-auto group-hover:brightness-125">
                 {proj.term}
               </span>
             </div>
@@ -59,13 +61,11 @@ export default function ProjectsSection() {
         ))}
       </div>
       <a
-        href="https://docs.google.com/document/d/1bvN3zt_BzmtPjl_jkHCu0kWL2yXIZYlfaW7vsbhEos4/edit?tab=t.0"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-md text-blue-400 hover:text-blue-500 underline font-semibold"
+        href="https://docs.google.com/document/d/1bvN3zt_BzmtPjl_jkHCu0kWL2yXIZYlfaW7vsbhEos4/edit"
+        className="text-base text-blue-400 hover:text-blue-500 underline font-semibold"
       >
         Click here for past projects
       </a>
-    </div>
+    </section>
   );
 }

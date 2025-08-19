@@ -28,7 +28,7 @@ export function UserProfile() {
       </button>
 
       {menuOpen && (
-        <div className="absolute right-0 w-48 bg-gray-100 shadow-lg rounded-lg">
+        <div className="absolute right-0 w-38 bg-gray-100 shadow-lg rounded-lg">
           <div className="px-4 py-2">{user.email}</div>
           <button
             onClick={signOut}

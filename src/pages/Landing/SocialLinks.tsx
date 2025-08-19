@@ -2,7 +2,7 @@ import { FaGoogle, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function SocialLinks() {
   return (
-    <div className="flex gap-6 mt-6 text-2xl">
+    <div className="flex justify-center sm:justify-start gap-6 text-2xl">
       <a
         href="https://gdg.community.dev/gdg-on-campus-william-mary-williamsburg-united-states/"
         target="_blank"
