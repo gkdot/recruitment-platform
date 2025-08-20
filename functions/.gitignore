@@ -10,4 +10,4 @@ node_modules/
 *.local
 
 # Secret files
-functions/serviceAccountKey.json
+serviceAccountKey.json
