@@ -28,8 +28,13 @@ export function UserProfile() {
       </button>
 
       {menuOpen && (
-        <div className="absolute right-0 w-38 bg-gray-100 shadow-lg rounded-lg">
-          <div className="px-4 py-2">{user.email}</div>
+        <div className="absolute right-0 max-w-xs w-auto bg-gray-100 shadow-lg rounded-lg overflow-hidden">
+          <div
+            className="px-4 py-2 truncate max-w-full"
+            title={user.email ?? ""}
+          >
+            {user.email}
+          </div>
           <button
             onClick={signOut}
             className="w-full text-left px-4 py-2 text-red-600 hover:text-red-700"
