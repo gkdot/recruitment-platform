@@ -7,7 +7,7 @@ interface HeroSectionProps {
 export default function HeroSection({ onSignUp }: HeroSectionProps) {
   return (
     <section className="bg-white rounded-lg shadow p-4 sm:p-6 lg:p-8">
-      <h1 className="text-2xl md:text-3xl font-bold mb-10">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6">
         Welcome to GDSC@W&M.
       </h1>
       <p className="text-base md:text-lg mb-6">
@@ -24,7 +24,12 @@ export default function HeroSection({ onSignUp }: HeroSectionProps) {
       <p className="text-base md:text-lg mb-6">
         William and Mary&apos;s DSC aims to build another bridge between
         computer science and the other disciplines through educational workshop
-        series and consulting projects with research groups on campus.
+        series and consulting projects with research groups on campus.{" "}
+        <b>
+          Fall 2025 recruitment for these projects is open until Tuesday,
+          September 30
+        </b>
+        .
       </p>
       <div className="flex gap-4 mt-8">
         <Link
