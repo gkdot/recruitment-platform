@@ -85,13 +85,28 @@ export function subscribeToRole(onRole: (role: Role | null) => void) {
  */
 export function useRole() {
   const [role, setRole] = useState<Role | null>(userRole);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = subscribeToRole(setRole);
-    return unsubscribe;
+    const unsub = onIdTokenChanged(auth, async (user) => {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      const token = await user.getIdTokenResult(true);
+      const claim = token.claims.role as Role | undefined;
+
+      if (isAdmin(claim as Role)) setRole(Roles.Admin);
+      else if (isApplicant(claim as Role)) setRole(Roles.Applicant);
+
+      setLoading(false);
+    });
+
+    return () => unsub();
   }, []);
 
-  return role;
+  return { role, loading };
 }
 
 /**

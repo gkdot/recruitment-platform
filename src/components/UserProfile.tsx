@@ -1,13 +1,30 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export function UserProfile() {
   const { user, signOut, signIn } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      await signIn();
+      navigate("/post-login");
+      console.log("Post login redirect was successful.");
+    } catch (err) {
+      console.error("Sign in failed:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!user) {
     return (
-      <button onClick={signIn} className="rounded-lg">
+      <button onClick={handleClick} className="rounded-lg">
         Sign in
       </button>
     );

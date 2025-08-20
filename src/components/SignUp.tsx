@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 interface SignUpFormProps {
@@ -6,14 +7,17 @@ interface SignUpFormProps {
 }
 
 export default function SignUp({ onClose }: SignUpFormProps) {
-  const { signIn } = useAuth();
   const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     if (loading) return;
     setLoading(true);
     try {
-      await signIn(); // redirect flow
+      await signIn();
+      navigate("/post-login");
+      console.log("Post login redirect was successful.");
     } catch (err) {
       console.error("Sign in failed:", err);
     } finally {

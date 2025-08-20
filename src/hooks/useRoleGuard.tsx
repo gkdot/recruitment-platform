@@ -12,7 +12,7 @@ export function useRoleGuard(
   allowedRoles: string[],
   redirectPath: string = "/"
 ) {
-  const role = useRole();
+  const role = useRole().role;
   const navigate = useNavigate();
 
   useEffect(() => {
