@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { requireAuth } from "./lib/loaders";
+import { startRoleListener } from "./lib/rbac";
+import { Roles } from "./types/role";
 
 const Landing = lazy(() => import("./pages/Landing/Landing"));
 const Loading = lazy(() => import("./pages/Loading"));
@@ -15,20 +17,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/applicant",
+    path: "/dashboard",
     element: <ApplicantDashboard />,
-    loader: () => requireAuth(["applicant"]),
+    loader: () => requireAuth([Roles.Applicant]),
     errorElement: <ErrorPage />,
   },
   {
     path: "/admin",
     element: <AdminDashboard />,
-    loader: () => requireAuth(["admin", "super_admin"]),
+    loader: () => requireAuth([Roles.Admin, Roles.SuperAdmin]),
     errorElement: <ErrorPage />,
-    // children: [
-    //   { path: "users", element: <AdminUsers /> },
-    //   { path: "settings", element: <AdminSettings /> },
-    // ],
   },
   {
     path: "*",
@@ -37,6 +35,7 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
+  useEffect(() => startRoleListener(), []);
   return (
     <Suspense fallback={<Loading />}>
       <RouterProvider router={router} />
