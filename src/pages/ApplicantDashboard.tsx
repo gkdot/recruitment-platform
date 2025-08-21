@@ -1,11 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
 import { useRoleGuard } from "../hooks/useRoleGuard";
 import { isApplicant } from "../lib/rbac";
+import { Roles } from "../types/role";
 import Layout from "../components/Layout";
 import Loading from "./Loading";
 
 export default function ApplicantDashboard() {
-  const role = useRoleGuard(["applicant"], "/forbidden");
+  const role = useRoleGuard([Roles.Applicant], "/forbidden");
 
   if (role === null || !isApplicant(role)) {
     return <Loading />;

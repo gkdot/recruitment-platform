@@ -8,11 +8,11 @@ import { useAuthRedirect } from "./hooks/useAuthRedirect";
 
 const Landing = lazy(() => import("./pages/Landing/Landing"));
 const Loading = lazy(() => import("./pages/Loading"));
-const ErrorPage = lazy(() => import("./pages/Error"));
+const Error = lazy(() => import("./pages/Error"));
 const ApplicantDashboard = lazy(() => import("./pages/ApplicantDashboard"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
-function PostLogin() {
+function AuthGate() {
   useAuthRedirect();
   return <Loading />;
 }
@@ -21,11 +21,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Landing />,
-    errorElement: <ErrorPage />,
+    errorElement: <Error />,
   },
   {
-    path: "/post-login",
-    element: <PostLogin />,
+    path: "/auth",
+    element: <AuthGate />,
   },
   {
     path: "/dashboard",
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       </ApplicantRoute>
     ),
     loader: () => requireAuth([Roles.Applicant]),
-    errorElement: <ErrorPage />,
+    errorElement: <Error />,
   },
   {
     path: "/admin",
@@ -45,11 +45,11 @@ const router = createBrowserRouter([
       </AdminRoute>
     ),
     loader: () => requireAuth([Roles.Admin, Roles.SuperAdmin]),
-    errorElement: <ErrorPage />,
+    errorElement: <Error />,
   },
   {
     path: "*",
-    element: <ErrorPage />,
+    element: <Error />,
   },
 ]);
 

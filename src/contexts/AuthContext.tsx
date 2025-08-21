@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(firebaseUser);
       setLoading(false);
       if (firebaseUser) {
-        console.log("Auth state changed, user logged in:", firebaseUser.email);
+        console.log("Auth state changed, user logged in: ", firebaseUser.email);
       }
     });
     return () => unsubscribe();
@@ -45,11 +45,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await setPersistence(auth, browserLocalPersistence);
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      await auth.currentUser?.getIdToken(true);
 
       console.log("Sign in was successful.");
     } catch (err) {
-      console.error("Sign in failed", err);
+      console.error("Sign in failed: ", err);
     }
   }, []);
 
@@ -58,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await firebaseSignOut(auth);
       console.log("Sign out successful.");
     } catch (err) {
-      console.error("Sign out failed", err);
+      console.error("Sign out failed: ", err);
     }
   }, []);
 
@@ -72,7 +71,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useAuth must be used within an AuthProvider.");
   }
   return context;
 }

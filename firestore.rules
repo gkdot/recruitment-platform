@@ -29,7 +29,7 @@ service cloud.firestore {
 
     // Coordinators may only update "status" field
     match /applications/{uid} {
-      allow update: if hasRole("interviewer") &&
+      allow update: if hasAnyRole(["admin", "super_admin"]) &&
                     request.resource.data.keys().hasOnly(["status"]);
     }
 

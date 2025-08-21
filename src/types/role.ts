@@ -1,4 +1,4 @@
-export type Role = "applicant" | "admin" | "interviewer" | "super_admin";
+export type Role = "applicant" | "admin" | "super_admin";
 
 // Role constants
 export const Roles = {

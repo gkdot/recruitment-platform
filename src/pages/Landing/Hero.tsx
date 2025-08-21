@@ -27,9 +27,8 @@ export default function HeroSection({ onSignUp }: HeroSectionProps) {
         series and consulting projects with research groups on campus.{" "}
         <b>
           Fall 2025 recruitment for these projects is open until Tuesday,
-          September 30
+          September 30.
         </b>
-        .
       </p>
       <div className="flex gap-4 mt-8">
         <Link

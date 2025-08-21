@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useAuthRedirect } from "../hooks/useAuthRedirect";
 
 export function UserProfile() {
   const { user, signOut, signIn } = useAuth();
@@ -8,13 +9,14 @@ export function UserProfile() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  useAuthRedirect();
+
   const handleClick = async () => {
     if (loading) return;
     setLoading(true);
     try {
       await signIn();
-      navigate("/post-login");
-      console.log("Post login redirect was successful.");
+      navigate("/auth");
     } catch (err) {
       console.error("Sign in failed:", err);
     } finally {

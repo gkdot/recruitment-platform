@@ -16,8 +16,7 @@ export default function SignUp({ onClose }: SignUpFormProps) {
     setLoading(true);
     try {
       await signIn();
-      navigate("/post-login");
-      console.log("Post login redirect was successful.");
+      navigate("/auth");
     } catch (err) {
       console.error("Sign in failed:", err);
     } finally {

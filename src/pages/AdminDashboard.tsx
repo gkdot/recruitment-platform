@@ -1,9 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
 import { useRoleGuard } from "../hooks/useRoleGuard";
 import { isAdmin } from "../lib/rbac";
+import { Roles } from "../types/role";
 import Layout from "../components/Layout";
 import Loading from "./Loading";
-import { Roles } from "../types/role";
 
 export default function AdminDashboard() {
   const role = useRoleGuard([Roles.Admin, Roles.SuperAdmin], "/forbidden");
