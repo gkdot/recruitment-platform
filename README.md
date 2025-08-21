@@ -16,11 +16,10 @@ Built using [React](https://react.dev/learn), [Vite](https://vite.dev/guide/), [
 
 ### Installing dependencies and running the app locally
 
-1. Check that npm is installed by running `npm -v`, if you do not see a version number output, install it: 
-```
-npm install -g npm
-```
-Additionally, make sure to have [Node.js](https://nodejs.org/en) installed as well.
+1. Check that npm is installed by running `npm -v`. 
+
+If you do not see a version number output, visit the official Node.js website and download [Node.js](https://nodejs.org/en). Choose the installer appropriate for your operating system (Windows, macOS, or Linux).
+
 2. Open a Terminal window in the `recruitment-platform` directory and run this command:
 ```
 npm install
@@ -30,7 +29,7 @@ This will install the project's dependencies, and set up a number of code checks
 ```
 npm run dev
 ```
-Your terminal should output a URL - if you enter that in your browser, you should be able to view the app.
+Your terminal should output a URL - if you enter that in your browser, you should be able to view the app locally.
 
 ### Configuring your environment variables
 
@@ -62,7 +61,7 @@ We use Vitest + @testing-library/react for unit tests and Cypress for end-to-end
 To run unit tests:
 
 ```
-npm test
+pnpm test
 ```
 
 ## Git and version control
