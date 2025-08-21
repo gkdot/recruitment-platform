@@ -7,7 +7,6 @@ import Loading from "./Loading";
 
 export default function AdminDashboard() {
   const role = useRoleGuard([Roles.Admin, Roles.SuperAdmin], "/forbidden");
-
   if (role === null || !isAdmin(role)) {
     return <Loading />;
   }
