@@ -3,7 +3,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { requireAuth } from "./lib/loaders";
 import { startRoleListener } from "./lib/rbac";
 import { Roles } from "./types/role";
-import { AdminRoute, ApplicantRoute } from "./components/PrivateRoute";
 import { useAuthRedirect } from "./hooks/useAuthRedirect";
 
 const Landing = lazy(() => import("./pages/Landing/Landing"));
@@ -29,21 +28,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-      <ApplicantRoute>
-        <ApplicantDashboard />
-      </ApplicantRoute>
-    ),
+    element: <ApplicantDashboard />,
     loader: () => requireAuth([Roles.Applicant]),
     errorElement: <Error />,
   },
   {
     path: "/admin",
-    element: (
-      <AdminRoute>
-        <AdminDashboard />
-      </AdminRoute>
-    ),
+    element: <AdminDashboard />,
     loader: () => requireAuth([Roles.Admin, Roles.SuperAdmin]),
     errorElement: <Error />,
   },
