@@ -22,6 +22,7 @@ export default function SignUp({ onClose }: SignUpFormProps) {
     } finally {
       setLoading(false);
     }
+    onClose();
   };
 
   return (
@@ -32,7 +33,7 @@ export default function SignUp({ onClose }: SignUpFormProps) {
         aria-label="Close"
         onClick={onClose}
         onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") handleClick();
+          if (e.key === "Enter" || e.key === " ") onClose();
         }}
         className="absolute inset-0 bg-black/60"
       ></div>
