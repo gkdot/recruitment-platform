@@ -6,7 +6,7 @@ export default function WorkshopsSection() {
       </h2>
       <p className="text-lg mb-4">
         Our Fall {new Date().getFullYear()} workshops begin{" "}
-        <b>Tuesday, September 4th.</b> No previous technical experience is
+        <b>Tuesday, September 23rd.</b> No previous technical experience is
         required. Even if you&apos;ve never taken a computer science class in
         your life, we start from square one and have our Core Team Consultants
         on-hand to assist and explain.
