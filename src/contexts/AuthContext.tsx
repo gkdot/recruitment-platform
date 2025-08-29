@@ -15,9 +15,10 @@ import {
   type ReactNode,
 } from "react";
 import { auth } from "../../firebase";
+import type { User } from "firebase/auth";
 
 interface AuthContextValue {
-  user: any;
+  user: User | null;
   loading: boolean;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
@@ -26,7 +27,7 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue>({} as AuthContextValue);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
