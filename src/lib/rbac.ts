@@ -155,8 +155,18 @@ export function startRoleListener() {
       userRole = null;
       return;
     }
-    const res = await user.getIdTokenResult();
-    userRole = (res.claims.role as Role) ?? null;
+    let res = await user.getIdTokenResult();
+    let roleClaim = res.claims.role as Role | undefined;
+    // If no role, try to refresh token a few times (for new users)
+    let tries = 0;
+    while (!roleClaim && tries < 10) {
+      await new Promise((r) => setTimeout(r, 300));
+      await user.getIdToken(true); // force refresh
+      res = await user.getIdTokenResult();
+      roleClaim = res.claims.role as Role | undefined;
+      tries++;
+    }
+    userRole = roleClaim ?? null;
   });
   return unsub;
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { useAuthRedirect } from "../hooks/useAuthRedirect";
+import { useRole, isAdmin, isApplicant } from "../lib/rbac";
 
 export function UserProfile() {
   const { user, signOut, signIn } = useAuth();
@@ -9,14 +9,21 @@ export function UserProfile() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  useAuthRedirect();
+  // Get current role for redirect after sign-in
+  const role = useRole().role;
 
   const handleClick = async () => {
     if (loading) return;
     setLoading(true);
     try {
       await signIn();
-      navigate("/auth");
+      if (isAdmin(role)) {
+        navigate("/admin");
+      } else if (isApplicant(role)) {
+        navigate("/dashboard");
+      } else {
+        navigate("/dashboard"); // fallback
+      }
     } catch (err) {
       console.error("Sign in failed:", err);
     } finally {
@@ -55,7 +62,11 @@ export function UserProfile() {
             {user.email}
           </div>
           <button
-            onClick={signOut}
+            onClick={async () => {
+              await signOut();
+              navigate("/");
+              window.location.reload();
+            }}
             className="w-full text-left px-4 py-2 text-red-600 hover:text-red-700"
           >
             Sign out

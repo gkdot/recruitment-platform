@@ -9,9 +9,10 @@ export async function requireAuth(allowedRoles?: string[]) {
 
   let role = getUserRole();
   const start = Date.now();
-  while (!role && Date.now() - start < 3000) {
-    // wait max 3s
-    await new Promise((r) => setTimeout(r, 100));
+  while (!role && Date.now() - start < 5000) {
+    // wait max 5s
+    await new Promise((r) => setTimeout(r, 200));
+    await refreshRole(); // actively refresh claims
     role = getUserRole();
   }
 

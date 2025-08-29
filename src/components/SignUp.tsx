@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useRole, isAdmin, isApplicant } from "../lib/rbac";
 
 interface SignUpFormProps {
   onClose: () => void;
@@ -8,22 +9,41 @@ interface SignUpFormProps {
 
 export default function SignUp({ onClose }: SignUpFormProps) {
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [signedIn, setSignedIn] = useState(false);
+
   const navigate = useNavigate();
+  const { signIn } = useAuth();
+  const { role, loading: roleLoading } = useRole();
 
   const handleClick = async () => {
     if (loading) return;
     setLoading(true);
     try {
       await signIn();
-      navigate("/auth");
+      setSignedIn(true);
+      // Navigation will happen in useEffect below
     } catch (err) {
       console.error("Sign in failed:", err);
     } finally {
       setLoading(false);
     }
-    onClose();
   };
+
+  // Wait for role to load after sign-in, then redirect
+  // Only redirect if user just signed in
+  // Don't close modal until after navigation
+  useEffect(() => {
+    if (signedIn && !roleLoading && role) {
+      if (isAdmin(role)) {
+        navigate("/admin");
+      } else if (isApplicant(role)) {
+        navigate("/dashboard");
+      } else {
+        navigate("/dashboard"); // fallback
+      }
+      onClose();
+    }
+  }, [signedIn, roleLoading, role, navigate, onClose]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
