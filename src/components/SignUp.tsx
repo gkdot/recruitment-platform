@@ -21,7 +21,6 @@ export default function SignUp({ onClose }: SignUpFormProps) {
     try {
       await signIn();
       setSignedIn(true);
-      // Navigation will happen in useEffect below
     } catch (err) {
       console.error("Sign in failed:", err);
     } finally {

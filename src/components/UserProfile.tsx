@@ -1,22 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useRole, isAdmin, isApplicant } from "../lib/rbac";
 
 export function UserProfile() {
-  const { user, signOut, signIn } = useAuth();
   const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
+  const [signedIn, setSignedIn] = useState(false);
 
+  const navigate = useNavigate();
+  const { user, signOut, signIn } = useAuth();
   // Get current role for redirect after sign-in
-  const role = useRole().role;
+  const { role, loading: roleLoading } = useRole();
 
   const handleClick = async () => {
     if (loading) return;
     setLoading(true);
     try {
       await signIn();
+      setSignedIn(true);
+    } catch (err) {
+      console.error("Sign in failed:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Wait for role to load after sign-in, then redirect
+  // Only redirect if user just signed in
+  // Don't close modal until after navigation
+  useEffect(() => {
+    if (signedIn && !roleLoading && role) {
       if (isAdmin(role)) {
         navigate("/admin");
       } else if (isApplicant(role)) {
@@ -24,12 +38,8 @@ export function UserProfile() {
       } else {
         navigate("/dashboard"); // fallback
       }
-    } catch (err) {
-      console.error("Sign in failed:", err);
-    } finally {
-      setLoading(false);
     }
-  };
+  }, [signedIn, roleLoading, role, navigate]);
 
   if (!user) {
     return (
