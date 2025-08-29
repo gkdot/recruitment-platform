@@ -97,9 +97,7 @@ export function useRole() {
       const token = await user.getIdTokenResult(true);
       const claim = token.claims.role as Role | undefined;
 
-      if (isAdmin(claim as Role)) setRole(Roles.Admin);
-      else if (isApplicant(claim as Role)) setRole(Roles.Applicant);
-
+      setRole(claim || null);
       setLoading(false);
     });
 
